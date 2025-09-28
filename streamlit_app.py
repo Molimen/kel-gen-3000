@@ -89,27 +89,28 @@ person = [
     [[1, 'P'], [2, 'P'], [3, 'L'], [4, 'L'], [5, 'L'], [6, 'P'], [7, 'L'], [8, 'L'], [9, 'L'], [10, 'P'], [11, 'P'], [12, 'L'], [13, 'L'], [14, 'L'], [15, 'P'], [16, 'P'], [17, 'L'], [18, 'L'], [19, 'P'], [20, 'P'], [21, 'P'], [22, 'P'], [23, 'L'], [24, 'L'], [25, 'L'], [26, 'L'], [27, 'P'], [28, 'P'], [29, 'P'], [30, 'P'], [31, 'L'], [32, 'P']]]
 
 st.markdown("""<h1 style= 'text-align: center;font-family: 'Cera CY', Helvetica, Arial, sans-serif;color:white'>"Justice" Kelompok Generator</h1>""", unsafe_allow_html=True)
-st.markdown("")
+st.markdown("<h4 style= 'text-align: center;font-family: cursive;color:white'>khusus kelas 10 (semua subkelas 10 bisa :D)</h4>", unsafe_allow_html=True)
+st.divider()
 
 kelas_option = st.selectbox(
-    "Choose an Kelas:",
+    "Pilih Kelas:",
     ["X-1", "X-2", "X-3", "X-4", "X-5", "X-6"]
 )
 
 find_what = st.radio(
-    "blud mw cari apa:",
-    ["Jika tau total kelompok", "Jika tau total member di kelompok"]
+    "Opsi:",
+    ["Jika hanya tau total kelompok", "Jika hanya tau total member di kelompok"]
 )
 
 member = 0
 total_kelompok = 0
-if find_what == "Jika tau total kelompok":
+if find_what == "Jika hanya tau total kelompok":
     total_kelompok = st.number_input("Masukan berapa kelompok:", min_value=0)
-elif find_what == "Jika tau total member di kelompok":
+elif find_what == "Jika hanya tau total member di kelompok":
     member = st.number_input("Masukan berapa member di kelompok:", min_value=0)
 
 kelompok = list()
-if st.button("Lakuin pencarian kelompok 3000! 🎲") and (member > 0 or total_kelompok > 0):
+if st.button("Lakuin pencarian kelompok! 🎲") and (member > 0 or total_kelompok > 0):
     try:
         kelompok = randomize(total_kelompok, person[int(kelas_option[2:])-1], member)
     except:
@@ -126,3 +127,12 @@ for i in kelompok:
 
     st.write(f"{counter:02d} | {", ".join(sorted(kell_buff))}")
     counter += 1
+
+st.divider()
+
+st.markdown("""
+        <br>
+        <span style='color:white;margin:0px;text-shadow:-2px -2px 0 red;font-weight:bold'>Credits:</span>
+        <br>
+        <span style='color:lime;text-shadow:-2px -2px 0 blue;font-weight:bold'>1.) Gw yang namanya cuma satu kata (Pembuat projek)
+        <br> 2.) Si tukang elektronik/komputer itu (Bugfixer)</span>""", unsafe_allow_html=True)
