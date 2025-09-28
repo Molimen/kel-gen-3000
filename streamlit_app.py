@@ -110,7 +110,10 @@ elif find_what == "Jika tau total member di kelompok":
 
 kelompok = list()
 if st.button("Lakuin pencarian kelompok 3000! 🎲") and (member > 0 or total_kelompok > 0):
-    kelompok = randomize(total_kelompok, person[int(kelas_option[2:])-1], member)
+    try:
+        kelompok = randomize(total_kelompok, person[int(kelas_option[2:])-1], member)
+    except:
+        st.error("Cek penulisannya!")
 
 counter = 1
 for i in kelompok:
