@@ -134,5 +134,6 @@ st.markdown("""
         <br>
         <span style='color:white;margin:0px;text-shadow:-2px -2px 0 red;font-weight:bold'>Credits:</span>
         <br>
-        <span style='color:lime;text-shadow:-2px -2px 0 blue;font-weight:bold'>1.) Gw yang namanya cuma satu kata (Pembuat projek)
-        <br> 2.) Si tukang elektronik/komputer itu (Bugfixer)</span>""", unsafe_allow_html=True)
+        <span style='color:lime;text-shadow:-2px -2px 0 blue;font-weight:bold'>1.) Gw yang tukang elektronik/komputer itu (Pembuat proyek)</span>
+        <br>
+        2.) si namanya cuma satu kata (design menu)""", unsafe_allow_html=True)
