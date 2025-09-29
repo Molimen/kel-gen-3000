@@ -94,10 +94,11 @@ st.divider()
 
 kelas_option = st.selectbox(
     "Pilih Kelas:",
-    ["X-1", "X-2", "X-3", "X-4", "X-5", "X-6"]
+    ["Kosong", "X-1", "X-2", "X-3", "X-4", "X-5", "X-6"]
 )
 
-find_what = st.radio(
+find_what = ""
+if not kelas_option == "Kosong": find_what = st.radio(
     "Opsi:",
     ["Jika hanya tau total kelompok", "Jika hanya tau total member di kelompok"]
 )
@@ -110,11 +111,15 @@ elif find_what == "Jika hanya tau total member di kelompok":
     member = st.number_input("Masukan berapa member di kelompok:", min_value=0)
 
 kelompok = list()
-if st.button("Lakuin pencarian kelompok! 🎲") and (member > 0 or total_kelompok > 0):
-    try:
-        kelompok = randomize(total_kelompok, person[int(kelas_option[2:])-1], member)
-    except:
-        st.error("Cek penulisannya!")
+if st.button("Lakuin pencarian kelompok! 🎲"):
+    if total_kelompok > 0 or member > 0:
+        if (member > 0 or total_kelompok > 0):
+            try:
+                kelompok = randomize(total_kelompok, person[int(kelas_option[2:])-1], member)
+            except:
+                st.error("Cek penulisannya!")
+    elif not kelas_option == "kosong":
+        st.error("Mohon disi Bagian atas!")
 
 counter = 1
 for i in kelompok:
