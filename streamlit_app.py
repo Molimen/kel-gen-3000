@@ -7,8 +7,6 @@ def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
-link_image = get_base64(r"image.jpg")
-
 def randomize(kelompok_total, person, member):
     if (kelompok_total > 0 and member > 0) or (kelompok_total <= 0 and member <= 0): raise TypeError("Invalid input!")
     if member > len(person): raise TypeError("More member than data that available")
@@ -80,6 +78,10 @@ def randomize(kelompok_total, person, member):
     kelompok = new_data
 
     return kelompok
+
+link_image = get_base64(r"image.jpg")
+
+st.set_page_config(page_title="Kelompok Generator", page_icon="icon.png")
 
 person = [
     # kelas x-1
