@@ -1,6 +1,13 @@
 import streamlit as st
 import random
 from math import floor
+import base64
+
+def get_base64(file_path):
+    with open(file_path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+link_image = get_base64(r"assets\image.jpg")
 
 def randomize(kelompok_total, person, member):
     if (kelompok_total > 0 and member > 0) or (kelompok_total <= 0 and member <= 0): raise TypeError("Invalid input!")
@@ -88,8 +95,8 @@ person = [
     # kelas x-6
     [[1, 'P'], [2, 'P'], [3, 'L'], [4, 'L'], [5, 'L'], [6, 'P'], [7, 'L'], [8, 'L'], [9, 'L'], [10, 'P'], [11, 'P'], [12, 'L'], [13, 'L'], [14, 'L'], [15, 'P'], [16, 'P'], [17, 'L'], [18, 'L'], [19, 'P'], [20, 'P'], [21, 'P'], [22, 'P'], [23, 'L'], [24, 'L'], [25, 'L'], [26, 'L'], [27, 'P'], [28, 'P'], [29, 'P'], [30, 'P'], [31, 'L'], [32, 'P']]]
 
-st.markdown("""<h1 style= 'text-align: center;font-family: 'Cera CY', Helvetica, Arial, sans-serif;color:white'>"Justice" Kelompok Generator</h1>""", unsafe_allow_html=True)
-st.markdown("<h4 style= 'text-align: center;font-family: cursive;color:white'>khusus kelas 10 (semua subkelas 10 bisa :D)</h4>", unsafe_allow_html=True)
+st.markdown("""<h1 style= 'text-align: center;font-family: 'Cera CY', Helvetica, Arial, sans-serif;'>"Justice" Kelompok Generator</h1>""", unsafe_allow_html=True)
+st.markdown("<h4 style= 'text-align: center;font-family: cursive;'>khusus kelas 10 (semua subkelas 10 bisa :D)</h4>", unsafe_allow_html=True)
 st.divider()
 
 kelas_option = st.selectbox(
@@ -119,7 +126,7 @@ if st.button("Lakuin pencarian kelompok! 🎲"):
             except:
                 st.error("Cek penulisannya!")
     elif not kelas_option == "kosong":
-        st.error("Mohon disi Bagian atas!")
+        st.error("Mohon di isi Bagian atas!")
 
 counter = 1
 for i in kelompok:
@@ -141,3 +148,29 @@ st.markdown("""
         <br>
         <span style='color:lime;text-shadow:-2px -2px 0 blue;font-weight:bold'>1.) Gw yang tukang elektronik/komputer itu (Pembuat proyek)
         <br>2.) si namanya cuma satu kata (design menu)</span>""", unsafe_allow_html=True)
+
+st.markdown(f"""
+            <br>
+            <div style="text-align:center;font-size:1.6rem;background-color:#171C26;border-radius:8px;padding:10px;">
+                <span style='margin:0px;font-weight:bold'>🏗️ Project lain</span>
+            </div>
+            <br>
+            <div class="convergence-regular" style='font-weight:bold;font-size:1.2rem;text-align:center'>Tempat Duduk Generator</div> 
+            <div style="text-align:center">
+                <span class="convergence-regular" style='font-weight:bold;font-size:0.9rem'>(Pembuat Tempat duduk yang adil, pencet gambar dibawah!)</span>
+            </div>
+            
+            <br>
+            <div style="text-align:center">
+                <a href="https://layout-tempat-duduk-generator.streamlit.app/">
+                    <img src="data:image/jpg;base64,{link_image}"
+                    alt = "placeholder"
+                    title="PENCET INI GAMBAR!!"
+                    target = "_blank"
+                    style="border-radius:20px;
+                    cursor:pointer;
+                    width:250px;
+                    border: 5px solid black;
+                    ">               
+                </a>
+            </div>""", unsafe_allow_html=True)
