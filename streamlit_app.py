@@ -7,7 +7,7 @@ def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
-link_image = get_base64(r"assets\image.jpg")
+link_image = get_base64(r"image.jpg")
 
 def randomize(kelompok_total, person, member):
     if (kelompok_total > 0 and member > 0) or (kelompok_total <= 0 and member <= 0): raise TypeError("Invalid input!")
