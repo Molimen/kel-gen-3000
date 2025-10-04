@@ -2,6 +2,7 @@ import streamlit as st
 import random
 from math import floor
 import base64
+from streamlit_javascript import st_javascript
 
 def get_base64(file_path):
     with open(file_path, "rb") as f:
@@ -79,6 +80,8 @@ def randomize(kelompok_total, person, member):
 
     return kelompok
 
+theme = st_javascript("window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'")
+
 link_image = get_base64(r"image.jpg")
 
 st.set_page_config(page_title="Kelompok Generator", page_icon="icon.png")
@@ -146,14 +149,15 @@ st.divider()
 
 st.markdown("""
         <br>
-        <span style='color:white;margin:0px;text-shadow:-2px -2px 0 red;font-weight:bold'>Credits:</span>
+        <span style='margin:0px;font-weight:bold'>Credits:</span>
         <br>
-        <span style='color:lime;text-shadow:-2px -2px 0 blue;font-weight:bold'>1.) Gw yang tukang elektronik/komputer itu (Pembuat proyek)
-        <br>2.) si namanya cuma satu kata (design menu)</span>""", unsafe_allow_html=True)
+        <pre>
+        <span style='font-weight:bold'>1.) Gw yang tukang elektronik/komputer itu (Pembuat proyek)<br>2.) si namanya cuma satu kata (design menu)</span>
+        </pre>""", unsafe_allow_html=True)
 
 st.markdown(f"""
             <br>
-            <div style="text-align:center;font-size:1.6rem;background-color:#171C26;border-radius:8px;padding:10px;">
+            <div style="text-align:center;font-size:1.6rem;background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;">
                 <span style='margin:0px;font-weight:bold'>🏗️ Project lain</span>
             </div>
             <br>
