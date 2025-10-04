@@ -125,11 +125,14 @@ elif find_what == "Jika hanya tau total member di kelompok":
 kelompok = list()
 if st.button("Lakuin pencarian kelompok! 🎲"):
     if total_kelompok > 0 or member > 0:
-        if (member > 0 or total_kelompok > 0):
-            try:
-                kelompok = randomize(total_kelompok, person[int(kelas_option[2:])-1], member)
-            except:
-                st.error("Cek penulisannya!")
+        try:
+            if (member == 11037 or total_kelompok == 11037):
+                raise ReferenceError
+            kelompok = randomize(total_kelompok, person[int(kelas_option[2:])-1], member)
+        except ReferenceError:
+            st.error("LEON!")
+        except:
+            st.error("Cek penulisannya!")
     elif not kelas_option == "kosong":
         st.error("Mohon di isi Bagian atas!")
 
