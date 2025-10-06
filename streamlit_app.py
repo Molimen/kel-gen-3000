@@ -86,6 +86,44 @@ link_image = get_base64(r"image.jpg")
 
 st.set_page_config(page_title="Kelompok Generator", page_icon="icon.png")
 
+st.markdown("""<style>
+@import url('https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&family=Anta&family=Convergence&family=Fredoka:wght@550&family=Patrick+Hand&display=swap');
+</style>""", unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+.fredoka-e {
+  font-family: "Fredoka", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 550;
+  font-style: normal;
+  font-size: 3rem;
+  font-variation-settings:
+    "wdth" 100;
+}
+.patrick-hand-regular {
+  font-family: "Patrick Hand", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.anta-regular {
+  font-family: "Anta", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.amaranth-regular {
+  font-family: "Amaranth", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.convergence-regular {
+  font-family: "Convergence", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+</style>""", unsafe_allow_html=True)
+
 person = [
     # kelas x-1
     [[1, 'L'], [2, 'L'], [3, 'L'], [4, 'P'], [5, 'P'], [6, 'L'], [7, 'P'], [8, 'P'], [9, 'L'], [10, 'L'], [11, 'L'], [12, 'P'], [13, 'L'], [14, 'L'], [15, 'P'], [16, 'P'], [17, 'P'], [18, 'L'], [19, 'P'], [20, 'L'], [21, 'L'], [22, 'L'], [23, 'P'], [24, 'P'], [25, 'L'], [26, 'P'], [27, 'L'], [28, 'L'], [29, 'P'], [30, 'P'], [31, 'P'], [32, 'L']], 
@@ -100,8 +138,15 @@ person = [
     # kelas x-6
     [[1, 'P'], [2, 'P'], [3, 'L'], [4, 'L'], [5, 'L'], [6, 'P'], [7, 'L'], [8, 'L'], [9, 'L'], [10, 'P'], [11, 'P'], [12, 'L'], [13, 'L'], [14, 'L'], [15, 'P'], [16, 'P'], [17, 'L'], [18, 'L'], [19, 'P'], [20, 'P'], [21, 'P'], [22, 'P'], [23, 'L'], [24, 'L'], [25, 'L'], [26, 'L'], [27, 'P'], [28, 'P'], [29, 'P'], [30, 'P'], [31, 'L'], [32, 'P']]]
 
-st.markdown("""<h1 style= 'text-align: center;font-family: 'Cera CY', Helvetica, Arial, sans-serif;'>"Justice" Kelompok Generator</h1>""", unsafe_allow_html=True)
-st.markdown("<h4 style= 'text-align: center;font-family: cursive;'>khusus kelas 10 (semua subkelas 10 bisa :D)</h4>", unsafe_allow_html=True)
+st.markdown(f"""
+            <div style="background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;line-height:0.95;">
+                <div class="fredoka-e" style= 'text-align: center;font-size:2.5rem;'>Tempat Duduk Generator</div>
+                <br style="margin-top:0px;line-height:0.625;">
+                <div class="anta-regular" style= 'text-align: center;font-size:1.525rem;'>khusus untuk semua kelas 10</div>
+            </div>""", unsafe_allow_html=True)
+
+#st.markdown("""<h1 style= 'text-align: center;font-family: 'Cera CY', Helvetica, Arial, sans-serif;'>"Justice" Kelompok Generator</h1>""", unsafe_allow_html=True)
+#st.markdown("<h4 style= 'text-align: center;font-family: cursive;'>khusus kelas 10 (semua subkelas 10 bisa :D)</h4>", unsafe_allow_html=True)
 st.divider()
 
 kelas_option = st.selectbox(
@@ -143,30 +188,25 @@ for i in kelompok:
     kell_buff = list()
     for j in i:
         if j[1] == "L":
-            kell_buff.append(f"**:red[{j[0]:02d}]**")
+            kell_buff.append(f"""<span style='color:{"#0059ff"};margin:0px;font-weight:bold'>{j[0]:02d}</span>""")
         elif j[1] == "P":
-            kell_buff.append(f"**:violet[{j[0]:02d}]**")
+            kell_buff.append(f"""<span style='color:{"#df017c"};margin:0px;font-weight:bold'>{j[0]:02d}</span>""")
 
-    st.write(f"{counter:02d} | {", ".join(sorted(kell_buff))}")
+    st.markdown(f"""<div style="background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;line-height:0.95;">
+                {counter:02d} | {', '.join(sorted(kell_buff))}
+                </div><br>""", unsafe_allow_html=True)
     counter += 1
 
 st.divider()
 
-st.markdown("""
-        <br>
-        <span style='margin:0px;font-weight:bold'>Credits:</span>
-        <br>
-        <pre>
-        <span style='font-weight:bold'>1.) Gw yang tukang elektronik/komputer itu (Pembuat proyek)<br>2.) si namanya cuma satu kata (design menu)</span>
-        </pre>""", unsafe_allow_html=True)
-
 st.markdown(f"""
-            <br>
             <div style="text-align:center;font-size:1.6rem;background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;">
                 <span style='margin:0px;font-weight:bold'>🏗️ Project lain</span>
             </div>
             <br>
+            <div style="background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:20px;line-height:0.95;">
             <div class="convergence-regular" style='font-weight:bold;font-size:1.2rem;text-align:center'>Tempat Duduk Generator</div> 
+            <br>
             <div style="text-align:center">
                 <span class="convergence-regular" style='font-weight:bold;font-size:0.9rem'>(Pembuat Tempat duduk yang adil, pencet gambar dibawah!)</span>
             </div>
@@ -184,4 +224,12 @@ st.markdown(f"""
                     border: 5px solid black;
                     ">               
                 </a>
-            </div>""", unsafe_allow_html=True)
+            </div></div>""", unsafe_allow_html=True)
+
+st.markdown("""
+        <br>
+        <span style='margin:0px;font-weight:bold'>Credits:</span>
+        <br>
+        <pre>
+        <span style='font-weight:bold'>1.) Gw yang tukang elektronik/komputer itu (Pembuat proyek)<br>2.) si namanya cuma satu kata (design menu    )</span>
+        </pre>""", unsafe_allow_html=True)
