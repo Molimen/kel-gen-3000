@@ -140,7 +140,7 @@ person = [
 
 st.markdown(f"""
             <div style="background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;line-height:0.95;">
-                <div class="fredoka-e" style= 'text-align: center;font-size:2.5rem;'>Tempat Duduk Generator</div>
+                <div class="fredoka-e" style= 'text-align: center;font-size:2.5rem;'>Kelompok Generator</div>
                 <br style="margin-top:0px;line-height:0.625;">
                 <div class="anta-regular" style= 'text-align: center;font-size:1.525rem;'>khusus untuk semua kelas 10</div>
             </div>""", unsafe_allow_html=True)
