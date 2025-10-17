@@ -1,2 +1,3 @@
 streamlit
 streamlit-javascript
+streamlit_extras.stylable_container

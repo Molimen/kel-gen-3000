@@ -3,6 +3,9 @@ import random
 from math import floor
 import base64
 from streamlit_javascript import st_javascript
+from streamlit_extras.stylable_container import stylable_container
+
+# INIT START!
 
 def get_base64(file_path):
     with open(file_path, "rb") as f:
@@ -82,7 +85,83 @@ def randomize(kelompok_total, person, member):
 
 theme = st_javascript("window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'")
 
-link_image = get_base64(r"image.jpg")
+params = st.query_params
+
+st.markdown("""
+<style>
+[data-testid="stSidebar"] {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+</style>
+""", unsafe_allow_html=True)
+
+button_sidebar_kelompok = f"""
+button {{
+    width: 60px;
+    height: 60px; 
+    background-image: url('data:image/png;base64,{get_base64("kelompok.png")}');
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+    background-color: #2b74d4;
+    transition: 0.3s;
+}}
+button:hover {{
+    background-color: #1b4f91;
+}}
+"""
+
+button_sidebar_tempat_duduk = f"""
+button {{
+    width: 60px;
+    height: 60px;
+    background-image: url('data:image/png;base64,{get_base64("tempat_duduk.png")}');
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+    background-color: #2b74d4;
+    transition: 0.3s;
+}}
+button:hover {{
+    background-color: #1b4f91;
+}}
+"""
+
+button_sidebar_settings = f"""
+button {{
+    width: 60px;
+    height: 60px;
+    background-image: url('data:image/png;base64,{get_base64("settings.png")}');
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+    background-color: #2b74d4;
+    transition: 0.3s;
+}}
+button:hover {{
+    background-color: #1b4f91;
+}}
+"""
+
+button_sidebar_about = f"""
+button {{
+    width: 60px;
+    height: 60px;
+    background-image: url('data:image/png;base64,{get_base64("about.png")}');
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+    background-color: #2b74d4;
+    transition: 0.3s;
+}}
+button:hover {{
+    background-color: #1b4f91;
+}}
+"""
 
 st.set_page_config(page_title="Kelompok Generator", page_icon="icon.png")
 
@@ -138,98 +217,171 @@ person = [
     # kelas x-6
     [[1, 'P'], [2, 'P'], [3, 'L'], [4, 'L'], [5, 'L'], [6, 'P'], [7, 'L'], [8, 'L'], [9, 'L'], [10, 'P'], [11, 'P'], [12, 'L'], [13, 'L'], [14, 'L'], [15, 'P'], [16, 'P'], [17, 'L'], [18, 'L'], [19, 'P'], [20, 'P'], [21, 'P'], [22, 'P'], [23, 'L'], [24, 'L'], [25, 'L'], [26, 'L'], [27, 'P'], [28, 'P'], [29, 'P'], [30, 'P'], [31, 'L'], [32, 'P']]]
 
-st.markdown(f"""
-            <div style="background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;line-height:0.95;">
-                <div class="fredoka-e" style= 'text-align: center;font-size:2.5rem;'>Kelompok Generator</div>
-                <br style="margin-top:0px;line-height:0.625;">
-                <div class="anta-regular" style= 'text-align: center;font-size:1.525rem;'>khusus untuk semua kelas 10</div>
-            </div>""", unsafe_allow_html=True)
+# INIT STOP
 
-#st.markdown("""<h1 style= 'text-align: center;font-family: 'Cera CY', Helvetica, Arial, sans-serif;'>"Justice" Kelompok Generator</h1>""", unsafe_allow_html=True)
-#st.markdown("<h4 style= 'text-align: center;font-family: cursive;'>khusus kelas 10 (semua subkelas 10 bisa :D)</h4>", unsafe_allow_html=True)
-st.divider()
+with st.sidebar:
+    with stylable_container(key="sidebar_kelompok", css_styles=button_sidebar_kelompok):
+        if st.button("", key="sidebar_btn_kelompok"):
+            st.query_params.clear()
+            st.query_params["apps"] = "kelompok"
 
-kelas_option = st.selectbox(
-    "Pilih Kelas:",
-    ["Kosong", "X-1", "X-2", "X-3", "X-4", "X-5", "X-6"]
-)
+    st.markdown(
+        """
+        <div style='display:flex; justify-content:center; align-items:center; padding:10px;'>
+                <span style='text-align: center;font-size:0.8rem;'>Kelompok</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-find_what = ""
-if not kelas_option == "Kosong": find_what = st.radio(
-    "Opsi:",
-    ["Jika hanya tau total kelompok", "Jika hanya tau total member di kelompok"]
-)
+    with stylable_container(key="sidebar_tempat_duduk", css_styles=button_sidebar_tempat_duduk):
+        if st.button("",key="sidebar_btn_tempat_duduk"):
+            st.query_params.clear()
+            st.query_params["apps"] = "tempat_duduk"
 
-member = 0
-total_kelompok = 0
-if find_what == "Jika hanya tau total kelompok":
-    total_kelompok = st.number_input("Masukan berapa kelompok:", min_value=0)
-elif find_what == "Jika hanya tau total member di kelompok":
-    member = st.number_input("Masukan berapa member di kelompok:", min_value=0)
+    st.markdown(
+        """
+        <div style='display:flex; justify-content:center; align-items:center; padding:10px;'>
+                <span style='text-align: center;font-size:0.8rem;'>Tempat Duduk</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-kelompok = list()
-if st.button("Lakuin pencarian kelompok! 🎲"):
-    if total_kelompok > 0 or member > 0:
-        try:
-            if (member == 11037 or total_kelompok == 11037) or (
-                member == 5500800 or total_kelompok == 5500800):
-                raise ReferenceError
-            kelompok = randomize(total_kelompok, person[int(kelas_option[2:])-1], member)
-        except ReferenceError:
-            if (member == 11037 or total_kelompok == 11037): st.error("LEON!")
-            elif (member == 5500800 or total_kelompok == 5500800): st.error("Someone forgot to pay that debt...")
-        except:
-            st.error("Cek penulisannya!")
-    elif not kelas_option == "kosong":
-        st.error("Mohon di isi Bagian atas!")
+    st.divider()
 
-counter = 1
-for i in kelompok:
-    kell_buff = list()
-    for j in i:
-        if j[1] == "L":
-            kell_buff.append(f"""<span style='color:{"#0059ff"};margin:0px;font-weight:bold'>{j[0]:02d}</span>""")
-        elif j[1] == "P":
-            kell_buff.append(f"""<span style='color:{"#df017c"};margin:0px;font-weight:bold'>{j[0]:02d}</span>""")
+    with stylable_container(key="sidebar_settings", css_styles=button_sidebar_settings):
+        if st.button("",key="sidebar_btn_settings"):
+            st.query_params.clear()
+            st.query_params["settings"] = "set1"
 
-    st.markdown(f"""<div style="background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;line-height:0.95;">
-                {counter:02d} | {', '.join(sorted(kell_buff))}
-                </div><br>""", unsafe_allow_html=True)
-    counter += 1
+    st.markdown(
+        """
+        <div style='display:flex; justify-content:center; align-items:center; padding:10px;'>
+                <span style='text-align: center;font-size:0.8rem;'>Settings</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-st.divider()
 
-st.markdown(f"""
-            <div style="text-align:center;font-size:1.6rem;background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;">
-                <span style='margin:0px;font-weight:bold'>🏗️ Project lain</span>
-            </div>
-            <br>
-            <div style="background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:20px;line-height:0.95;">
-            <div class="convergence-regular" style='font-weight:bold;font-size:1.2rem;text-align:center'>Tempat Duduk Generator</div> 
-            <br>
-            <div style="text-align:center">
-                <span class="convergence-regular" style='font-weight:bold;font-size:0.9rem'>(Pembuat Tempat duduk yang adil, pencet gambar dibawah!)</span>
-            </div>
-            
-            <br>
-            <div style="text-align:center">
-                <a href="https://layout-tempat-duduk-generator.streamlit.app/">
-                    <img src="data:image/jpg;base64,{link_image}"
-                    alt = "placeholder"
-                    title="PENCET INI GAMBAR!!"
-                    target = "_blank"
-                    style="border-radius:20px;
-                    cursor:pointer;
-                    width:250px;
-                    border: 5px solid black;
-                    ">               
-                </a>
-            </div></div>""", unsafe_allow_html=True)
+    with stylable_container(key="sidebar_about", css_styles=button_sidebar_about):
+        if st.button("",key="sidebar_btn_about"):
+            st.query_params.clear()
+            st.query_params["about"] = ""
 
-st.markdown("""
-        <br>
-        <span style='margin:0px;font-weight:bold'>Credits:</span>
-        <br>
-        <pre>
-        <span style='font-weight:bold'>1.) Gw yang tukang elektronik/komputer itu (Pembuat proyek)<br>2.) si namanya cuma satu kata (design menu    )</span>
-        </pre>""", unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div style='display:flex; justify-content:center; align-items:center; padding:10px;'>
+                <span style='text-align: center;font-size:0.8rem;'>About Us</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+if params:
+    if params.get("apps") == "kelompok":
+        st.markdown(f"""
+                    <div style="background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;line-height:0.95;">
+                        <div class="fredoka-e" style= 'text-align: center;font-size:2.5rem;'>Kelompok Generator</div>
+                        <br style="margin-top:0px;line-height:0.625;">
+                        <div class="anta-regular" style= 'text-align: center;font-size:1.525rem;'>khusus untuk semua kelas 10</div>
+                    </div>""", unsafe_allow_html=True)
+
+        st.divider()
+
+        kelas_option = st.selectbox(
+            "Pilih Kelas:",
+            ["Kosong", "X-1", "X-2", "X-3", "X-4", "X-5", "X-6"]
+        )
+
+        find_what = ""
+        if not kelas_option == "Kosong": find_what = st.radio(
+            "Opsi:",
+            ["Jika hanya tau total kelompok", "Jika hanya tau total member di kelompok"]
+        )
+
+        member = 0
+        total_kelompok = 0
+        if find_what == "Jika hanya tau total kelompok":
+            total_kelompok = st.number_input("Masukan berapa kelompok:", min_value=0)
+        elif find_what == "Jika hanya tau total member di kelompok":
+            member = st.number_input("Masukan berapa member di kelompok:", min_value=0)
+
+        kelompok = list()
+        if st.button("Lakuin pencarian kelompok! 🎲"):
+            if total_kelompok > 0 or member > 0:
+                try:
+                    if (member == 11037 or total_kelompok == 11037) or (
+                        member == 5500800 or total_kelompok == 5500800):
+                        raise ReferenceError
+                    kelompok = randomize(total_kelompok, person[int(kelas_option[2:])-1], member)
+                except ReferenceError:
+                    if (member == 11037 or total_kelompok == 11037): st.error("LEON!")
+                    elif (member == 5500800 or total_kelompok == 5500800): st.error("Someone forgot to pay that debt...")
+                except:
+                    st.error("Cek penulisannya!")
+            elif not kelas_option == "kosong":
+                st.error("Mohon di isi Bagian atas!")
+
+        counter = 1
+        for i in kelompok:
+            kell_buff = list()
+            for j in i:
+                if j[1] == "L":
+                    kell_buff.append(f"""<span style='color:{"#0059ff"};margin:0px;font-weight:bold'>{j[0]:02d}</span>""")
+                elif j[1] == "P":
+                    kell_buff.append(f"""<span style='color:{"#df017c"};margin:0px;font-weight:bold'>{j[0]:02d}</span>""")
+
+            st.markdown(f"""<div style="background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;line-height:0.95;">
+                        {counter:02d} | {', '.join(sorted(kell_buff))}
+                        </div><br>""", unsafe_allow_html=True)
+            counter += 1
+
+    elif params.get("apps") == "tempat_duduk":
+        st.write("Work in progress...")
+
+    if params.get("settings") == "set1":
+        st.write("Work in progress...")
+
+    if params.get("about") == "":
+        st.markdown(f"""
+                    <div style="text-align:center;font-size:1.6rem;background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;">
+                        <span style='margin:0px;font-weight:bold'>🏗️ Project lain</span>
+                    </div>
+                    <br>
+                    <div style="background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:20px;line-height:0.95;">
+                    <div class="convergence-regular" style='font-weight:bold;font-size:1.2rem;text-align:center'>Tempat Duduk Generator</div> 
+                    <br>
+                    <div style="text-align:center">
+                        <span class="convergence-regular" style='font-weight:bold;font-size:0.9rem'>(Pembuat Tempat duduk yang adil, pencet gambar dibawah!)</span>
+                    </div>
+                    
+                    <br>
+                    <div style="text-align:center">
+                        <a href="https://layout-tempat-duduk-generator.streamlit.app/">
+                            <img src="data:image/jpg;base64,{get_base64(r"image.jpg")}"
+                            alt = "placeholder"
+                            title="PENCET INI GAMBAR!!"
+                            target = "_blank"
+                            style="border-radius:20px;
+                            cursor:pointer;
+                            width:250px;
+                            border: 5px solid black;
+                            ">               
+                        </a>
+                    </div></div>""", unsafe_allow_html=True)
+
+        st.markdown("""
+                <br>
+                <span style='margin:0px;font-weight:bold'>Credits:</span>
+                <br>
+                <pre>
+                <span style='font-weight:bold'>1.) Gw yang tukang elektronik/komputer itu (Pembuat proyek)<br>2.) si namanya cuma satu kata (design menu    )</span>
+                </pre>""", unsafe_allow_html=True)
+        
+else:
+    # Temporary
+    st.write("redirected...")
+    st.query_params.clear()
+    st.query_params["apps"] = "kelompok"
