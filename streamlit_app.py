@@ -87,6 +87,7 @@ theme = st_javascript("window.matchMedia('(prefers-color-scheme: dark)').matches
 
 params = st.query_params
 
+
 st.markdown("""
 <style>
 [data-testid="stSidebar"] {
@@ -95,6 +96,31 @@ st.markdown("""
     max-width: 100px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+            
+[data-testid="stExpandSidebarButton"] [data-testid="stIconMaterial"],
+[data-testid="stSidebarCollapseButton"] [data-testid="stIconMaterial"] {
+    position: relative;
+    color: transparent !important;
+}
+
+[data-testid="stExpandSidebarButton"] [data-testid="stIconMaterial"]::after {
+    content: "Menu";
+    color: rgba(250, 250, 250, 0.6); !important;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+[data-testid="stSidebarCollapseButton"] [data-testid="stIconMaterial"]::after {
+    content: "Menu";
+    color: rgba(250, 250, 250, 0.6); !important;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+
 }
 </style>
 """, unsafe_allow_html=True)
@@ -385,3 +411,4 @@ else:
     st.write("redirected...")
     st.query_params.clear()
     st.query_params["apps"] = "kelompok"
+    st.rerun()
