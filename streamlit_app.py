@@ -129,7 +129,7 @@ button_sidebar_kelompok = f"""
 button {{
     width: 60px;
     height: 60px; 
-    background-image: url('data:image/png;base64,{get_base64("kelompok.png")}');
+    background-image: url('data:image/png;base64,{get_base64("assets/kelompok.png")}');
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
@@ -145,23 +145,7 @@ button_sidebar_tempat_duduk = f"""
 button {{
     width: 60px;
     height: 60px;
-    background-image: url('data:image/png;base64,{get_base64("tempat_duduk.png")}');
-    background-repeat: no-repeat;
-    background-size: 40px;
-    background-position: center;
-    background-color: #2b74d4;
-    transition: 0.3s;
-}}
-button:hover {{
-    background-color: #1b4f91;
-}}
-"""
-
-button_sidebar_settings = f"""
-button {{
-    width: 60px;
-    height: 60px;
-    background-image: url('data:image/png;base64,{get_base64("settings.png")}');
+    background-image: url('data:image/png;base64,{get_base64("assets/tempat_duduk.png")}');
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
@@ -177,7 +161,7 @@ button_sidebar_about = f"""
 button {{
     width: 60px;
     height: 60px;
-    background-image: url('data:image/png;base64,{get_base64("about.png")}');
+    background-image: url('data:image/png;base64,{get_base64("assets/about.png")}');
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
@@ -189,11 +173,12 @@ button:hover {{
 }}
 """
 
-st.set_page_config(page_title="Kelompok Generator", page_icon="icon.png")
+st.set_page_config(page_title="Kelompok Generator", page_icon="assets/icon.png")
 
 st.markdown("""<style>
 @import url('https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&family=Anta&family=Convergence&family=Fredoka:wght@550&family=Patrick+Hand&display=swap');
-</style>""", unsafe_allow_html=True)
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=BBH+Sans+Bogle&family=Momo+Trust+Display&display=swap');            
+            </style>""", unsafe_allow_html=True)
 
 st.markdown("""
 <style>
@@ -227,6 +212,20 @@ st.markdown("""
   font-style: normal;
 }
 
+.bbh-sans-bogle-regular {
+    font-family: "BBH Sans Bogle", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@media (max-width: 768px) {
+    .mobile-only {display: block;}
+    .desktop-only {display: none;}
+}
+@media (min-width: 769px) {
+    .mobile-only {display: none;}
+    .desktop-only {display: block;}
+}         
 </style>""", unsafe_allow_html=True)
 
 person = [
@@ -275,20 +274,6 @@ with st.sidebar:
     )
 
     st.divider()
-
-    with stylable_container(key="sidebar_settings", css_styles=button_sidebar_settings):
-        if st.button("",key="sidebar_btn_settings"):
-            st.query_params.clear()
-            st.query_params["settings"] = "set1"
-
-    st.markdown(
-        """
-        <div style='display:flex; justify-content:center; align-items:center; padding:10px;'>
-                <span style='text-align: center;font-size:0.8rem;'>Settings</span>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 
 
     with stylable_container(key="sidebar_about", css_styles=button_sidebar_about):
@@ -367,9 +352,6 @@ if params:
     elif params.get("apps") == "tempat_duduk":
         st.write("Work in progress...")
 
-    if params.get("settings") == "set1":
-        st.write("Work in progress...")
-
     if params.get("about") == "":
         st.markdown(f"""
                     <div style="text-align:center;font-size:1.6rem;background-color:{"#171C26" if theme == "dark" else "#f0f2f6"};border-radius:8px;padding:10px;">
@@ -386,7 +368,7 @@ if params:
                     <br>
                     <div style="text-align:center">
                         <a href="https://layout-tempat-duduk-generator.streamlit.app/">
-                            <img src="data:image/jpg;base64,{get_base64(r"image.jpg")}"
+                            <img src="data:image/jpg;base64,{get_base64(r"assets/image.jpg")}"
                             alt = "placeholder"
                             title="PENCET INI GAMBAR!!"
                             target = "_blank"
@@ -403,8 +385,8 @@ if params:
                 <span style='margin:0px;font-weight:bold'>Credits:</span>
                 <br>
                 <pre>
-                <span style='font-weight:bold'>1.) Gw yang tukang elektronik/komputer itu (Pembuat proyek)<br>2.) si namanya cuma satu kata (design menu    )</span>
-                </pre>""", unsafe_allow_html=True)
+                <span style='font-weight:bold'>1.) Gw yang tukang elektronik/komputer itu (Pembuat proyek)<br>2.) si namanya cuma satu kata (design menu)</span>
+                </pre>""", unsafe_allow_html=True) 
         
 else:
     # Temporary
