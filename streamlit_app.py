@@ -109,6 +109,13 @@ params = st.query_params
 data_acc_1 = {"login": "Molimen", "html_url": "https://github.com/Molimen", "avatar_url": "https://avatars.githubusercontent.com/u/95009791?v=4"}
 data_acc_2 = {"login": "Ce21plozz", "html_url": "https://github.com/ce21plozz", "avatar_url": "https://avatars.githubusercontent.com/u/230108871?v=4"}
 
+if "toggle" not in st.session_state:
+    st.session_state.toggle = False
+
+if st.session_state.toggle:
+    st.session_state.toggle = False
+else:
+    st.session_state.toggle = True
 
 st.markdown(f"""
 <style>
@@ -441,6 +448,13 @@ person = [
      [31, 'L', 0.0], 
      [32, 'P', 0.0]]]
 
+def play_error_sound():
+    with st.sidebar:
+        if st.session_state.toggle:
+            st.audio("assets/error.wav", format="audio/wav", autoplay=True, width=1)
+        else:
+            st.audio("assets/error.wav", format="audio/wav", autoplay=True, width=2)
+
 # INIT STOP
 
 with st.sidebar:
@@ -533,11 +547,13 @@ if params:
                 except ReferenceError:
                     if (member == 11037 or total_kelompok == 11037): st.error("LEON!")
                     elif (member == 5500800 or total_kelompok == 5500800): st.error("Someone forgot to pay that debt...")
+                    play_error_sound()
                 except:
                     st.error("Cek penulisannya!")
+                    play_error_sound()
             elif not kelas_option == "kosong":
                 st.error("Mohon di isi Bagian atas!")
-
+                play_error_sound()
         counter = 1
         for i in kelompok:
             kell_buff = list()
